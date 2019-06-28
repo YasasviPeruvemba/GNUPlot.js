@@ -69,7 +69,7 @@ function click (node) {
 var saveAs = _global.saveAs || (
   // probably in some web worker
   (typeof window !== 'object' || window !== _global)
-    ? function saveAs () { /* noop */ }
+     ? function saveAs () { /* noop */ }
 
   // Use download attribute first if possible (#193 Lumia mobile)
   : 'download' in HTMLAnchorElement.prototype
