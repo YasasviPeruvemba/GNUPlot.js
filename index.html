@@ -17,14 +17,24 @@ set terminal svg
 #WRITE CODE FROM HERE ONWARDS
 </textarea>
 	        <br>
-	        <button class="btn btn-info" onclick="generateOp()">Generate Graph!</button>
+	        <button class="btn btn-info" onclick="generateOp()">Generate Graph!</button>&nbsp&nbsp&nbsp&nbsp
 	        <button class="btn btn-info" onclick="deleteEverything(); window.location.reload(true)">Refresh Everything</button><br><br>
-            <input type="file" id="files" name="files[]" multiple />
-		</div>
+	        <label class="btn btn-default btn-file">
+            	Add Data Files <input type="file" style="display: none;" id="files" name="files[]" multiple /><br>
+        	</label><br><br>
+        	<p id="UploadList" style="display: none; font-size: 30;"><u>All Uploaded Files :</u></p>
+        	<ul id="table" type="disc"style="font-weight: 20;">
+            </ul>
+        </div>
 		<br>
 		<p id="image" align="center"></p>
+		<br>
+	<div style="padding-left: 40px; padding-right: 40px;" align="center">
+		<button id="download" class="btn btn-info" onclick="generateDownload()" style="display: none;">Download Image</button><br><br>
+	</div>
 	</body>
-	<script src="gnuplotasm.js"></script>
+	<script src="gnuplot.js"></script>
+	<script src="FileSaver.js"></script>
 	<script>
 		var file_names = []
 		function generateOp(){
@@ -45,6 +55,28 @@ set terminal svg
 			var para = document.getElementById("image");
 			para.innerHTML = outstr;
             FS.unlink("input");
+            var db = document.getElementById("download");
+            db.setAttribute("style","display: block;")
+		}
+
+		function showFiles() { 
+		  var par = document.getElementById("UploadList");
+		  par.setAttribute("style","display: bloack;");
+	      var table = document.getElementById("table");
+	      var str = "";
+	      for(var i=0,f;f = file_names[i];i++){
+	      	str += "<li><b>"
+	      	str += f;
+	      	str += "</b>"
+	      }
+	      table.innerHTML = str;
+	    };
+
+		function generateDownload(){
+			var svgtext = document.getElementById("image").innerHTML;
+			//console.log(svgtext)
+			var blob = new Blob([svgtext],{type: "image/svg;charset=utf-8"})
+			saveAs(blob,"graphImage.svg");
 		}
 
 		function FileHandler(evt){
@@ -61,6 +93,7 @@ set terminal svg
                         console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
                         file_names.push(fname);
                         FS.createDataFile("/",fname,e.target.result,true,true,true);
+                        showFiles();
                     }
                 };
                 reader.readAsText(f);
