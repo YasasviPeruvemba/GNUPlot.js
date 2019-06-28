@@ -37,7 +37,7 @@ cp ./src/gnuplot ../gnuplot.o
 cd ..
 ```
 
-Generate gnuplotasm.js
+Generate gnuplot.js
 
 ```
 emcc -s WASM=0 -O2 -s FORCE_FILESYSTEM=1 -s 'EXTRA_EXPORTED_RUNTIME_METHODS=["intArrayFromString","intArraytoString"]' gnuplot.o -o gnuplot.js --pre-js pre.js
