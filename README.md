@@ -1,8 +1,8 @@
 # gnuplot.js
 
-Port of gnuplot to javaScript using Emscripten
+Port of GnuPlot to JavaScript using Emscripten.
 
-gnuplot is a command-line program that can generate two- and three-dimensional plots of functions, data, and data fits. The program runs on all major computers and operating systems.
+GnuPlot is a command-line program that can generate two- and three-dimensional plots of functions, data, and data fits. The program runs on all major computers and operating systems.
 
 
 ## Getting Started
@@ -16,7 +16,7 @@ Installation guide: https://emscripten.org/docs/getting_started/downloads.html
 
 ### Installing
 
-For Creating gnuplotasm.js
+For Creating gnuplot.js
 After installing emscripten, add emcc to environment variable
 
 ```
@@ -40,13 +40,16 @@ cd ..
 Generate gnuplotasm.js
 
 ```
-emcc -s WASM=0 -O2 -s FORCE_FILESYSTEM=1 -s 'EXTRA_EXPORTED_RUNTIME_METHODS=["intArrayFromString","intArraytoString"]' gnuplot.o -o gnuplotasm.js --pre-js pre.js
+emcc -s WASM=0 -O2 -s FORCE_FILESYSTEM=1 -s 'EXTRA_EXPORTED_RUNTIME_METHODS=["intArrayFromString","intArraytoString"]' gnuplot.o -o gnuplot.js --pre-js pre.js
 ```
 
 ## Contributing
 
-<a href="https://github.com/YasasviPeruvemba/"><b>Yasasvi Peruvemba</b></a>
+<a href="https://github.com/YasasviPeruvemba/"><b>Yasasvi Peruvemba</b></a><br>
 <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
+
+## Source Files
+The source files for GnuPlot can be found at the repository of <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
 
 ## Authors
 
