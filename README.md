@@ -5,7 +5,7 @@ Port of GnuPlot to JavaScript using Emscripten.
 GnuPlot is a command-line program that can generate two- and three-dimensional plots of functions, data, and data fits. The program runs on all major computers and operating systems.
 
 
-## Getting Started
+## Getting Started 
 
 Emscripten is a toolchain for compiling to asm.js and WebAssembly, built using LLVM, that lets you run C and C++ on the web at near-native speed without plugins.
 
