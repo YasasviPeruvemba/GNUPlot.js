@@ -53,7 +53,6 @@ The source files for GnuPlot can be found at the repository of <a href="https://
 
 ## Authors
 
-[
  * Copyright 1986 - 1993, 1998, 2004   Thomas Williams, Colin Kelley
  *
  * Permission to use, copy, and distribute this software and its
@@ -81,4 +80,4 @@ The source files for GnuPlot can be found at the repository of <a href="https://
  *
  * This software is provided "as is" without express or implied warranty
  * to the extent permitted by applicable law.
-]
+
