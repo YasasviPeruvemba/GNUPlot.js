@@ -49,7 +49,7 @@ emcc -s WASM=0 -O2 -s FORCE_FILESYSTEM=1 -s 'EXTRA_EXPORTED_RUNTIME_METHODS=["in
 <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
 
 ## Source Files
-The source files for GnuPlot can be found at the repository of <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
+The source files for GnuPlot without any modification can be found at the repository of <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
 
 ## Authors
 
