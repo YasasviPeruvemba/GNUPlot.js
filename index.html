@@ -40,36 +40,36 @@ set terminal svg
 		function generateOp(){
 			///THIS IS FOR FILE HANDLING
 			//console.log(file_names)
-            for (var key in file_names)
-            	if(FS.findObject(key))
-                	console.log("Found locally stored file: " + key);
+		    for (var key in file_names)
+			if(FS.findObject(key))
+				console.log("Found locally stored file: " + key);
 
-            // THESE ARE TO ACTUALLY GENERATE THE GRAPHS
-			var text = document.getElementById("cmd").value;
-			//console.log(text);
-			outstr = "";
-			var file = FS.createDataFile("/","input",text,true,true,true);
-			Module.callMain(['input']);
-			outstr += "</svg>";
-			//console.log(outstr);
-			var para = document.getElementById("image");
-			para.innerHTML = outstr;
-            FS.unlink("input");
-            var db = document.getElementById("download");
-            db.setAttribute("style","display: block;")
+		    // THESE ARE TO ACTUALLY GENERATE THE GRAPHS
+				var text = document.getElementById("cmd").value;
+				//console.log(text);
+				outstr = "";
+				var file = FS.createDataFile("/","input",text,true,true,true);
+				Module.callMain(['input']);
+				outstr += "</svg>";
+				//console.log(outstr);
+				var para = document.getElementById("image");
+				para.innerHTML = outstr;
+		    FS.unlink("input");
+		    var db = document.getElementById("download");
+		    db.setAttribute("style","display: block;")
 		}
 
 		function showFiles() { 
 		  var par = document.getElementById("UploadList");
 		  par.setAttribute("style","display: bloack;");
-	      var table = document.getElementById("table");
-	      var str = "";
-	      for(var i=0,f;f = file_names[i];i++){
-	      	str += "<li><b>"
-	      	str += f;
-	      	str += "</b>"
-	      }
-	      table.innerHTML = str;
+		      var table = document.getElementById("table");
+		      var str = "";
+		      for(var i=0,f;f = file_names[i];i++){
+			str += "<li><b>"
+			str += f;
+			str += "</b>"
+		      }
+		      table.innerHTML = str;
 	    };
 
 		function generateDownload(){
@@ -92,6 +92,7 @@ set terminal svg
                     if (e.target.result) {
                         console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
                         file_names.push(fname);
+			if(FS.findObject(fname)) FS.unlink(fname);
                         FS.createDataFile("/",fname,e.target.result,true,true,true);
                         showFiles();
                     }
