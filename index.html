@@ -37,6 +37,7 @@ set terminal svg
 	<script src="FileSaver.js"></script>
 	<script>
 		var file_names = []
+		var fname = "";
 		function generateOp(){
 			///THIS IS FOR FILE HANDLING
 			//console.log(file_names)
@@ -82,7 +83,7 @@ set terminal svg
             for (var i=0,f;f = files_meta[i];i++) {
             	//THIS IS THE FILE READER WHICH STORES THE DATA
                 var reader = new FileReader();
-                var fname = f.name;
+                fname = f.name;
 		console.log(fname);
 		if(FS.findObject(fname)){FS.unlink(fname);}
                 reader.onloadend = function(e) {
