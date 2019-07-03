@@ -43,7 +43,7 @@ Generate gnuplot.js
 emcc -s WASM=0 -O2 -s FORCE_FILESYSTEM=1 -s 'EXTRA_EXPORTED_RUNTIME_METHODS=["intArrayFromString","intArraytoString"]' gnuplot.o -o gnuplot.js --pre-js pre.js
 ```
 
-## Contributing
+## Contributors
 
 <a href="https://github.com/YasasviPeruvemba/"><b>Yasasvi Peruvemba</b></a><br>
 <a href="https://github.com/ajit3259/"><b>Ajit Kumar</b></a>
@@ -80,6 +80,6 @@ The source files for GnuPlot without any modification can be found at the reposi
   with corresponding source modifications in the form of a patch file is
   granted with same provisions 2 through 4 for binary distributions.
  
-  This software is provided "as is" without express or implied warranty
+  This software is provided "AS IS" without express or implied warranty
   to the extent permitted by applicable law.
 
