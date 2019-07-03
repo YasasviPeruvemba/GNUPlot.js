@@ -59,7 +59,7 @@ set terminal svg
 		}
 		function showFiles() { 
 		  var par = document.getElementById("UploadList");
-		  par.setAttribute("style","display: bloack;");
+		  par.setAttribute("style","display: block;");
 		      var table = document.getElementById("table");
 		      var str = "";
 		      for(var i=0,f;f = file_names[i];i++){
@@ -83,6 +83,7 @@ set terminal svg
             	//THIS IS THE FILE READER WHICH STORES THE DATA
                 var reader = new FileReader();
                 var fname = f.name;
+		console.log(fname);
 		if(FS.findObject(fname)){FS.unlink(fname);}
                 reader.onloadend = function(e) {
                     if (e.target.result) {
