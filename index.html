@@ -82,18 +82,33 @@ set terminal svg
 		    for (var i=0,f;f = files_meta[i];i++) {
 			//THIS IS THE FILE READER WHICH STORES THE DATA
 			var reader = new FileReader();
-			var fname = f.name;
 			reader.readAsText(f);
-			if(FS.findObject(fname)) {FS.unlink(fname);}
-			reader.onload =  function(e) {
-			    //var fname = e.data.filename;
-			    if (e.target.result) {
-				console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
-				file_names.push(fname);
-				FS.createDataFile("/",fname,e.target.result,true,true,true);
-				showFiles();
-			    }
-			}
+			reader.onload =  (function(thefile){ 
+				return function(e) {
+				    //var fname = e.data.filename;
+				    if (e.target.result) {
+					console.log(thefile.name + ": Read success - storing in browser. " + e.target.result.length);
+					file_names.push(thefile.name);
+					if(FS.findObject(thefile.name)) {FS.unlink(thefile.name);}
+					FS.createDataFile("/",thefile.name,e.target.result,true,true,true);
+					showFiles();
+				    }
+				}
+			})(f);
+			/*
+		        reader.onload = (function(theFile){
+			    	return function(e) {
+                                if (e.target.result) {
+                                    files[theFile.name] = e.target.result;
+                                    f_names.push(theFile.name);
+                                    console.log(theFile.name);
+                                    console.log(files[theFile.name]);
+				    if(FS.findObject(theFile.name)) FS.unlink(theFile.name);
+                                    FS.createDataFile("/",theFile.name,files[theFile.name],true,true,true);
+                                }
+                            };
+                        })(f);
+			*/  
 		    }
 		}
 		function deleteEverything(){
