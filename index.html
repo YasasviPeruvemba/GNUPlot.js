@@ -84,9 +84,8 @@ set terminal svg
             	//THIS IS THE FILE READER WHICH STORES THE DATA
                 var reader = new FileReader();
                 fname = f.name;
-		console.log(fname);
 		if(FS.findObject(fname)){FS.unlink(fname);}
-                reader.onloadend = function(e) {
+                reader.onload = function(e) {
                     if (e.target.result) {
                         console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
                         file_names.push(fname);
