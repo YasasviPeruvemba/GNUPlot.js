@@ -94,21 +94,7 @@ set terminal svg
 					showFiles();
 				    }
 				}
-			})(f);
-			/*
-		        reader.onload = (function(theFile){
-			    	return function(e) {
-                                if (e.target.result) {
-                                    files[theFile.name] = e.target.result;
-                                    f_names.push(theFile.name);
-                                    console.log(theFile.name);
-                                    console.log(files[theFile.name]);
-				    if(FS.findObject(theFile.name)) FS.unlink(theFile.name);
-                                    FS.createDataFile("/",theFile.name,files[theFile.name],true,true,true);
-                                }
-                            };
-                        })(f);
-			*/  
+			})(f);  
 		    }
 		}
 		function deleteEverything(){
