@@ -37,7 +37,6 @@ set terminal svg
 	<script src="FileSaver.js"></script>
 	<script>
 		var file_names = []
-		var fname = "";
 		function generateOp(){
 			///THIS IS FOR FILE HANDLING
 			//console.log(file_names)
@@ -83,9 +82,12 @@ set terminal svg
             for (var i=0,f;f = files_meta[i];i++) {
             	//THIS IS THE FILE READER WHICH STORES THE DATA
                 var reader = new FileReader();
-                fname = f.name;
-		if(FS.findObject(fname)){FS.unlink(fname);}
-                reader.onload = function(e) {
+                /*var fname = f.name;
+		if(FS.findObject(fname)){FS.unlink(fname);}*/
+                reader.onload = $(reader).load({
+        		filename: input.files.item(i).name
+      		},function(e) {
+		    var fname = e.data.filename;
                     if (e.target.result) {
                         console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
                         file_names.push(fname);
