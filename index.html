@@ -5,7 +5,6 @@
 	    <meta name="viewport" content="width=device-width, initial-scale=1">
 	    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
 	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 	    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 	</head>
 	<body>
@@ -78,27 +77,24 @@ set terminal svg
 		}
 		function FileHandler(evt){
 			var files_meta = evt.target.files; // Metadata of Files
-            // files is a FileList of File objects. List some properties.
-            var output = [];
-            for (var i=0,f;f = files_meta[i];i++) {
-            	//THIS IS THE FILE READER WHICH STORES THE DATA
-                var reader = new FileReader();
-                /*var fname = f.name;
-		if(FS.findObject(fname)){FS.unlink(fname);}
-                reader.onload = */ 
-		$(reader).load({
-        		filename: input.files.item(i).name
-      		},function(e) {
-		    var fname = e.data.filename;
-                    if (e.target.result) {
-                        console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
-                        file_names.push(fname);
-                        FS.createDataFile("/",fname,e.target.result,true,true,true);
-                        showFiles();
-                    }
-                })
-                reader.readAsText(f);
-            }
+		    // files is a FileList of File objects. List some properties.
+		    var output = [];
+		    for (var i=0,f;f = files_meta[i];i++) {
+			//THIS IS THE FILE READER WHICH STORES THE DATA
+			var reader = new FileReader();
+			var fname = f.name;
+			if(FS.findObject(fname)) {FS.unlink(fname);}
+			reader.onload =  function(e) {
+			    //var fname = e.data.filename;
+			    if (e.target.result) {
+				console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
+				file_names.push(fname);
+				FS.createDataFile("/",fname,e.target.result,true,true,true);
+				showFiles();
+			    }
+			}
+			reader.readAsText(f);
+		    }
 		}
 		function deleteEverything(){
 			for(var i=0,f;f = file_names[i];i++){
