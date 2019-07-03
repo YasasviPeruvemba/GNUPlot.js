@@ -97,7 +97,7 @@ set terminal svg
 		}
 		function deleteEverything(){
 			for(var i=0,f;f = file_names[i];i++){
-				FS.unlink(f);
+				if(FS.findObject(f)) FS.unlink(f);
 			}
 			file_names = [];
 		}
