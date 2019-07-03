@@ -83,6 +83,7 @@ set terminal svg
 			//THIS IS THE FILE READER WHICH STORES THE DATA
 			var reader = new FileReader();
 			var fname = f.name;
+			reader.readAsText(f);
 			if(FS.findObject(fname)) {FS.unlink(fname);}
 			reader.onload =  function(e) {
 			    //var fname = e.data.filename;
@@ -93,7 +94,6 @@ set terminal svg
 				showFiles();
 			    }
 			}
-			reader.readAsText(f);
 		    }
 		}
 		function deleteEverything(){
