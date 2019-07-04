@@ -85,21 +85,20 @@ set terminal svg
 			var files_meta = evt.target.files; // Metadata of Files
 
             // files is a FileList of File objects. List some properties.
-            var output = [];
             for (var i=0,f;f = files_meta[i];i++) {
             	//THIS IS THE FILE READER WHICH STORES THE DATA
                 var reader = new FileReader();
-                var fname = f.name;
-                reader.onloadend = function(e) {
-                    if (e.target.result) {
-                        console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
-                        file_names.push(fname);
-			if(FS.findObject(fname)) FS.unlink(fname);
-                        FS.createDataFile("/",fname,e.target.result,true,true,true);
-                        showFiles();
-                    }
-                };
-                reader.readAsText(f);
+		reader.readAsText(f);
+                reader.onload = (function(thefile){
+			  return function(e) {
+                                if (e.target.result) {
+				    console.log("Read file ",thefile.name," succesfully.");
+                                    f_names.push(thefile.name);
+				    if(FS.findObject(thefile.name)) FS.unlink(thefile.name);
+                                    FS.createDataFile("/",thefile.name,e.target.result,true,true,true);
+                                }
+                          };
+                 })(f);
             }
 		}
 
