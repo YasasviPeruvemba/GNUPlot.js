@@ -13,6 +13,8 @@
 			<h2><b><u>Port of GNUPlot</u></b></h2>
 			<br>
 	        <textarea class="form-control" id="cmd" rows="10">#DO NOT DELETE THE FIRST LINE, CONTINUE WRITING YOUR CODE AFTER IT
+#UNCOMMENT THE FOLLOWING LINE IF YOU USED MULTIPLOT, BUT HAD SOME SYNTAX ERROR
+#unset multiplot
 set terminal svg
 #WRITE CODE FROM HERE ONWARDS
 </textarea>
@@ -33,7 +35,7 @@ set terminal svg
 		<button id="download" class="btn btn-info" onclick="generateDownload()" style="display: none;">Download Image</button><br><br>
 	</div>
 	</body>
-	<script src="gnuplotasm.js"></script>
+	<script src="gnuplot.js"></script>
 	<script src="FileSaver.js"></script>
 	<script>
 		var file_names = []
@@ -43,6 +45,7 @@ set terminal svg
 		    for (var key in file_names)
 			if(FS.findObject(key))
 				console.log("Found locally stored file: " + key);
+
 		    // THESE ARE TO ACTUALLY GENERATE THE GRAPHS
 				var text = document.getElementById("cmd").value;
 				//console.log(text);
@@ -57,9 +60,10 @@ set terminal svg
 		    var db = document.getElementById("download");
 		    db.setAttribute("style","display: block;")
 		}
+
 		function showFiles() { 
 		  var par = document.getElementById("UploadList");
-		  par.setAttribute("style","display: block;");
+		  par.setAttribute("style","display: bloack;");
 		      var table = document.getElementById("table");
 		      var str = "";
 		      for(var i=0,f;f = file_names[i];i++){
@@ -69,40 +73,43 @@ set terminal svg
 		      }
 		      table.innerHTML = str;
 	    };
+
 		function generateDownload(){
 			var svgtext = document.getElementById("image").innerHTML;
 			//console.log(svgtext)
 			var blob = new Blob([svgtext],{type: "image/svg;charset=utf-8"})
 			saveAs(blob,"graphImage.svg");
 		}
+
 		function FileHandler(evt){
 			var files_meta = evt.target.files; // Metadata of Files
-		    // files is a FileList of File objects. List some properties.
-		    var output = [];
-		    for (var i=0,f;f = files_meta[i];i++) {
-			//THIS IS THE FILE READER WHICH STORES THE DATA
-			var reader = new FileReader();
-			reader.readAsText(f);
-			reader.onload =  (function(thefile){ 
-				return function(e) {
-				    //var fname = e.data.filename;
-				    if (e.target.result) {
-					console.log(thefile.name + ": Read success - storing in browser. " + e.target.result.length);
-					file_names.push(thefile.name);
-					if(FS.findObject(thefile.name)) {FS.unlink(thefile.name);}
-					FS.createDataFile("/",thefile.name,e.target.result,true,true,true);
-					showFiles();
-				    }
-				}
-			})(f);  
-		    }
+
+            // files is a FileList of File objects. List some properties.
+            var output = [];
+            for (var i=0,f;f = files_meta[i];i++) {
+            	//THIS IS THE FILE READER WHICH STORES THE DATA
+                var reader = new FileReader();
+                var fname = f.name;
+                reader.onloadend = function(e) {
+                    if (e.target.result) {
+                        console.log(fname + ": Read success - storing in browser. " + e.target.result.length);
+                        file_names.push(fname);
+			if(FS.findObject(fname)) FS.unlink(fname);
+                        FS.createDataFile("/",fname,e.target.result,true,true,true);
+                        showFiles();
+                    }
+                };
+                reader.readAsText(f);
+            }
 		}
+
 		function deleteEverything(){
 			for(var i=0,f;f = file_names[i];i++){
-				if(FS.findObject(f)) FS.unlink(f);
+				FS.unlink(f);
 			}
 			file_names = [];
 		}
+
 		//THIS WILL ENSURE EVERY TIME A DOCUMENT IS ADDED, IT IS UPDATED TO THE LIST OF FILES
 		document.getElementById('files').addEventListener('change', FileHandler, false);
 	</script>
