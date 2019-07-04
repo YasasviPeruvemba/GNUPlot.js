@@ -96,6 +96,7 @@ set terminal svg
                                     file_names.push(thefile.name);
 				    if(FS.findObject(thefile.name)) FS.unlink(thefile.name);
                                     FS.createDataFile("/",thefile.name,e.target.result,true,true,true);
+			            showFiles();
                                 }
                           };
                  })(f);
