@@ -93,7 +93,7 @@ set terminal svg
 			  return function(e) {
                                 if (e.target.result) {
 				    console.log("Read file ",thefile.name," succesfully.");
-                                    f_names.push(thefile.name);
+                                    file_names.push(thefile.name);
 				    if(FS.findObject(thefile.name)) FS.unlink(thefile.name);
                                     FS.createDataFile("/",thefile.name,e.target.result,true,true,true);
                                 }
